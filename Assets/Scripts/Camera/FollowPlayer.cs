@@ -8,16 +8,19 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] Transform targetTransform;
     [SerializeField] float smoothSpeed = 0.125f;
     [SerializeField] Vector3 offset;
+    [SerializeField] Vector3 camRotation;
 
     private void Awake()
     {
         target = GameObject.Find("Player");
         targetTransform = target.transform;
+
     }
 
     //Late Update is similar to Update. However, it is called right after. 
     void LateUpdate()
     {
         transform.position = targetTransform.position + offset;
+        transform.eulerAngles = camRotation;
     }
 }

@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Rigidbody playerRB;
     [SerializeField] float speed = 5f;
     [SerializeField] Camera cam;
-    [SerializeField] GameObject barrel;
-    [SerializeField] Projectile projectile;
+    [SerializeField] Transform hand;
+
     private Vector3 vectorInput;
     private Vector3 mousePos;
+    private Rigidbody playerRB;
+    private WeaponController weaponController;
 
     // Start is called before the first frame update
     void Start()
     {
         //Acquire the player game object's Rigidbody component and save it.
         playerRB = GetComponent<Rigidbody>();
+        weaponController = GetComponent<WeaponController>();
     }
 
     // Update is called once per frame
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
         GetInput();
         AimAtMouse();
         FireWeapon();
+        Reload();
     }
 
     private void FixedUpdate()
@@ -39,8 +42,7 @@ public class Player : MonoBehaviour
 
     private void GetInput()
     {
-        vectorInput = new Vector3(Input.GetAxisRaw("Horizontal"),
-                                            0,
+        vectorInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0,
                                             Input.GetAxisRaw("Vertical"));
     }
 
@@ -52,7 +54,7 @@ public class Player : MonoBehaviour
         Ray camToMouseRay = cam.ScreenPointToRay(Input.mousePosition);
 
         //Create a plane so that the ray can be intersected. 
-        Plane plane = new Plane(Vector3.up, Vector3.zero);
+        Plane plane = new Plane(Vector3.up, transform.position);
 
         //If the ray interscets with the plane then return true and determine the distance between the intersection position and the origin
         if (plane.Raycast(camToMouseRay, out rayDistance))
@@ -62,6 +64,8 @@ public class Player : MonoBehaviour
 
             //Have the player look at the point on the x and z axis.
             transform.LookAt(new Vector3(point.x, transform.position.y, point.z));
+
+            Debug.DrawRay(camToMouseRay.origin, point, Color.red);
         }
     }
 
@@ -70,8 +74,16 @@ public class Player : MonoBehaviour
         //If left mouse button was pressed
         if (Input.GetMouseButtonDown(0))
         {
-            //TODO this line should maybe be in a gun script to create a seperation of concerns
-            Instantiate(projectile, barrel.transform.position, Quaternion.identity);
+            weaponController.Shoot();
+        }
+    }
+
+    private void Reload()
+    {
+        //If 'R' was pressed
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            weaponController.Reload();
         }
     }
 }
