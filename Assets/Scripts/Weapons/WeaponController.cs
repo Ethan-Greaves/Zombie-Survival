@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] Projectile projectile;
     [SerializeField] Weapon startingWeapon;
     [SerializeField] Weapon equippedWeapon;
     [SerializeField] Transform hand;
 
 
-    
     // Start is called before the first frame update
     void Start()
     {
         if(equippedWeapon == null)
             EquipWeapon(startingWeapon);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Shoot()
@@ -32,7 +24,8 @@ public class WeaponController : MonoBehaviour
 
     public void Reload()
     {
-        StartCoroutine(equippedWeapon.Reload());
+        if (equippedWeapon != null)
+            StartCoroutine(equippedWeapon.Reload());
     }
 
     public void EquipWeapon(Weapon weaponToEquip)
@@ -43,6 +36,7 @@ public class WeaponController : MonoBehaviour
 
         equippedWeapon = Instantiate(weaponToEquip, hand.transform.position, hand.transform.rotation) as Weapon;
         equippedWeapon.transform.parent = hand;
-
     }
+
+    public Weapon GetEquippedWeapon() { return equippedWeapon; }
 }

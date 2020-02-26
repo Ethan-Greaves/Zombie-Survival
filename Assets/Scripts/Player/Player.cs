@@ -12,6 +12,16 @@ public class Player : MonoBehaviour
     private Vector3 mousePos;
     private Rigidbody playerRB;
     private WeaponController weaponController;
+    private int m_Health;
+    private Animator m_Animator;
+
+    //Getters
+    public int GetHealth() { return m_Health; }
+
+    private void Awake()
+    {
+        
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +29,8 @@ public class Player : MonoBehaviour
         //Acquire the player game object's Rigidbody component and save it.
         playerRB = GetComponent<Rigidbody>();
         weaponController = GetComponent<WeaponController>();
+        m_Animator = GetComponent<Animator>();
+        m_Health = 100;
     }
 
     // Update is called once per frame
@@ -26,8 +38,11 @@ public class Player : MonoBehaviour
     {
         GetInput();
         AimAtMouse();
-        FireWeapon();
-        Reload();
+        CheckFireWeapon();
+        CheckReload();
+        CheckPauseGame();
+
+        Debug.Log(GameManager.Instance().GetIsPaused());
     }
 
     private void FixedUpdate()
@@ -38,6 +53,8 @@ public class Player : MonoBehaviour
     private void Move()
     {
         playerRB.AddForce(vectorInput * speed * Time.fixedDeltaTime);
+        //m_Animator.SetFloat("Movement", vectorInput.z);
+        //m_Animator.SetFloat("Strafing", vectorInput.x);
     }
 
     private void GetInput()
@@ -64,26 +81,32 @@ public class Player : MonoBehaviour
 
             //Have the player look at the point on the x and z axis.
             transform.LookAt(new Vector3(point.x, transform.position.y, point.z));
-
-            Debug.DrawRay(camToMouseRay.origin, point, Color.red);
         }
     }
 
-    private void FireWeapon()
+    private void CheckFireWeapon()
     {
         //If left mouse button was pressed
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             weaponController.Shoot();
         }
     }
 
-    private void Reload()
+    private void CheckReload()
     {
         //If 'R' was pressed
         if (Input.GetKeyDown(KeyCode.R))
         {
             weaponController.Reload();
+        }
+    }
+
+    private void CheckPauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Instance().PauseGame(true);
         }
     }
 }

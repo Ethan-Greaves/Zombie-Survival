@@ -14,7 +14,6 @@ public class FollowPlayer : MonoBehaviour
     {
         target = GameObject.Find("Player");
         targetTransform = target.transform;
-
     }
 
     //Late Update is similar to Update. However, it is called right after. 

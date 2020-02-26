@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265800901022261401}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.046, y: 0.65657, z: 0.822}
   m_LocalScale: {x: 0.12561347, y: 0.112444595, z: 0.427922}
   m_Children:
@@ -107,13 +107,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d84caa1e2a6cc647872960d3d702abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1459061041409505348, guid: 840836783d7605c45b7f4a757c9b47ed,
+  m_GunReloadSound: {fileID: 8300000, guid: 446a949d08573cd40b5b17fc1fce888f, type: 3}
+  m_GunFireSound: {fileID: 8300000, guid: e5b22da7d4e53594b8ddbfb717de6803, type: 3}
+  m_GunEmptyMagazineSound: {fileID: 8300000, guid: b5eb554390217e94f80dd06e41b548fb,
     type: 3}
-  gunReloadSound: {fileID: 8300000, guid: 51a6312e6a9a1484e9c6fc4c7ca506dc, type: 3}
-  gunFireSound: {fileID: 8300000, guid: e5b22da7d4e53594b8ddbfb717de6803, type: 3}
-  rayCastDistance: 100
   muzzleFlash: {fileID: 1306024301257001089, guid: 06e8658c39a235d49b066039af38b4ed,
     type: 3}
+  fireRate: 2
+  magazineSize: 5
+  startingAmmo: 10
+  rayCastDistance: 100
+  m_Enemy: {fileID: 1475017140331337610, guid: 016e7bf62a334b6408f97e97b5e49ec7, type: 3}
 --- !u!82 &4879503498791900553
 AudioSource:
   m_ObjectHideFlags: 0
@@ -234,7 +238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265800901724960028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.572}
+  m_LocalPosition: {x: 0, y: 0.058, z: 0.639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265800901022261402}

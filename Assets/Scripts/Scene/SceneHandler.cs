@@ -5,10 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
+
+    static SceneHandler m_SceneHandlerInstance;
+
+    //Used for initialising variables or game states
+    private void Awake()
+    {
+        m_SceneHandlerInstance = new SceneHandler();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+
+    public static SceneHandler Instance()
+    {
+        if(m_SceneHandlerInstance == null)
+        {
+            m_SceneHandlerInstance = new SceneHandler();
+        }
+
+        return m_SceneHandlerInstance;
     }
 
     public void LoadNextScene()
@@ -23,10 +42,20 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void LoadSceneByName(string sceneName, LoadSceneMode mode)
+    {
+        SceneManager.LoadScene(sceneName, mode);
+    }
+
     public void ReturnToMenu()
     {
         int startMenu = 0;
         SceneManager.LoadScene(startMenu);
+    }
+
+    public void RemoveScene(string sceneName)
+    {
+        SceneManager.UnloadSceneAsync(sceneName);
     }
 
     //This function will only work on standalone builds of the game.
