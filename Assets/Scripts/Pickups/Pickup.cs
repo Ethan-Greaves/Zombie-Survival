@@ -24,7 +24,7 @@ public abstract class Pickup : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Play SFX
-        //m_AudioSource.PlayOneShot()
+        //m_AudioSource.PlayOneShot(m_PickupSFX);
 
         //Play VFX
 

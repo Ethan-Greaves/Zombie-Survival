@@ -5,6 +5,8 @@ using UnityEngine;
 public class PickupManager : MonoBehaviour
 {
     private static PickupManager pickupMangerInstance;
+    [SerializeField] WeaponPickup[] m_WeaponPickups;
+
     public static PickupManager Instance()
     {
         if (pickupMangerInstance == null)

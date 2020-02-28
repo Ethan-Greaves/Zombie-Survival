@@ -8,13 +8,8 @@ public class Rifle : Weapon
 
     override public void FireWeapon()
     {
-        //Play the firing sound effect
-        audioSource.PlayOneShot(m_GunFireSound);
-
-        ReduceProjectileInMagazine();
-
         RaycastHit hitInfo;
-        if (Physics.Raycast(GetBarrel().transform.position, GetBarrel().transform.forward, out hitInfo, rayCastDistance))
+        if (Physics.Raycast(m_Barrel.transform.position, m_Barrel.transform.forward, out hitInfo, rayCastDistance))
         {
             Debug.Log(hitInfo.transform.name);
         }

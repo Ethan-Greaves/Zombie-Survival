@@ -4,26 +4,30 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-    [SerializeField] float rayCastDistance = 100.0f;
-    [SerializeField] Enemy m_Enemy;
+    [SerializeField] float m_BulletDistance = 100.0f;
+    [SerializeField] float m_ImpactForce = 30.0f;
 
     override public void FireWeapon()
     {
-        //Play the firing sound effect
-        audioSource.PlayOneShot(m_GunFireSound);
-
-        ReduceProjectileInMagazine();
-
         RaycastHit hitInfo;
-        if (Physics.Raycast(GetBarrel().transform.position, GetBarrel().transform.forward, out hitInfo, rayCastDistance))
+        if (Physics.Raycast(m_Barrel.transform.position, m_Barrel.transform.forward, out hitInfo, m_BulletDistance))
         {
             Debug.Log(hitInfo.transform.name);
-            DamageEnemy();
+
+            //Acquire the enemy
+            Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
+
+            if(enemy != null)
+            {
+                enemy.TakeDamage(m_Damage);
+
+                //if(hitInfo.rigidbody != null)
+                //{
+                //    hitInfo.rigidbody.AddForce(-hitInfo.normal * m_ImpactForce);
+                //}
+            }
         }
     }
 
-    private void DamageEnemy()
-    {
-        m_Enemy.TakeDamage();
-    }
+    
 }

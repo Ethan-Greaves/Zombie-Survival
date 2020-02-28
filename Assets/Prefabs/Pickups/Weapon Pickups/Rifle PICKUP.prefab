@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3459083581318870950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8125, y: 1.8125, z: 1.8125}
   m_Children:
   - {fileID: 5031332340726912270}
   - {fileID: 5132076204109430662}
@@ -142,14 +142,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3459083581318870950}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12c2b01c74dea804c97dafe84b43516b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PlayerCharacter: {fileID: 3960561726354727869, guid: f2909141fc27d594f87c0308a325a8ea,
+    type: 3}
+  m_PickupSFX: {fileID: 0}
   m_Weapon: {fileID: -7375974109829486485, guid: dd2ddfa7a78cb6a4880ab5dd23f59be0,
     type: 3}
-  m_PlayerCharacter: {fileID: 0}
 --- !u!54 &6080096179704409550
 Rigidbody:
   m_ObjectHideFlags: 0

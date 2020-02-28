@@ -35,8 +35,13 @@ public class WeaponController : MonoBehaviour
             Destroy(equippedWeapon.gameObject);
 
         equippedWeapon = Instantiate(weaponToEquip, hand.transform.position, hand.transform.rotation) as Weapon;
-        equippedWeapon.transform.parent = hand;
+        equippedWeapon.transform.SetParent(hand);
     }
 
     public Weapon GetEquippedWeapon() { return equippedWeapon; }
+
+    public void Aim(Vector3 aim)
+    {
+        equippedWeapon.Aim(aim);
+    }
 }

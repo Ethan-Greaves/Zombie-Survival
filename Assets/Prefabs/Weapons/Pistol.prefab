@@ -111,11 +111,12 @@ MonoBehaviour:
   m_GunFireSound: {fileID: 8300000, guid: e5b22da7d4e53594b8ddbfb717de6803, type: 3}
   m_GunEmptyMagazineSound: {fileID: 8300000, guid: b5eb554390217e94f80dd06e41b548fb,
     type: 3}
-  muzzleFlash: {fileID: 1306024301257001089, guid: 06e8658c39a235d49b066039af38b4ed,
+  m_MuzzleFlash: {fileID: 1306024301257001089, guid: 06e8658c39a235d49b066039af38b4ed,
     type: 3}
-  fireRate: 2
-  magazineSize: 5
-  startingAmmo: 10
+  m_Damage: 0
+  m_FireRate: 1
+  m_MagazineSize: 10
+  m_StartingAmmo: 5
   rayCastDistance: 100
   m_Enemy: {fileID: 1475017140331337610, guid: 016e7bf62a334b6408f97e97b5e49ec7, type: 3}
 --- !u!82 &4879503498791900553

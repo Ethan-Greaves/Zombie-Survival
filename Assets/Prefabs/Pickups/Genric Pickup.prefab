@@ -122,10 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c2b01c74dea804c97dafe84b43516b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PlayerCharacter: {fileID: 0}
+  m_PickupSFX: {fileID: 0}
   m_Weapon: {fileID: -7375974109829486485, guid: dd2ddfa7a78cb6a4880ab5dd23f59be0,
     type: 3}
-  m_PlayerCharacter: {fileID: 0}
-  m_WeaponPickupSFX: {fileID: 8300000, guid: d53c12658eaf9d9418c1f9327a5f4032, type: 3}
 --- !u!82 &531543971
 AudioSource:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d53c12658eaf9d9418c1f9327a5f4032, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

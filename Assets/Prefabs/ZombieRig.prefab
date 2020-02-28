@@ -1877,7 +1877,7 @@ Transform:
   m_GameObject: {fileID: 162410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.6, y: 5.313058, z: 8.3}
-  m_LocalScale: {x: 0.53550124, y: 0.53550124, z: 0.53550124}
+  m_LocalScale: {x: 0.33426255, y: 0.33426255, z: 0.33426255}
   m_Children:
   - {fileID: 474474}
   - {fileID: 421262}
@@ -1953,9 +1953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccb3b5b05c252240891e52d1dbd429b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Health: 0
   m_MoveSpeed: 0
   m_Damage: 0
+  m_Health: 50
   m_TakeDamageVFX: {fileID: 5506757148536559197, guid: 496351b5fd0f77d4385726844e5d7077,
     type: 3}
   m_EnemyNoises:
@@ -1963,9 +1963,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bd82303c58c30c34998e2ee539bca6c7, type: 3}
   - {fileID: 8300000, guid: c45ab695502fd724bb05197d2ae312d9, type: 3}
   - {fileID: 8300000, guid: 0ff85e3628059684abc0bc9e54dc2a52, type: 3}
-  m_EnemyNoiseRate: 10
+  m_EnemyNoiseRate: 5
   m_EnemyDamageTakenSFX:
   - {fileID: 8300000, guid: 439a42639c541da46a3724807716710c, type: 3}
+  m_Player: {fileID: 0}
 --- !u!82 &533609747
 AudioSource:
   m_ObjectHideFlags: 0

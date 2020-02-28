@@ -10,45 +10,47 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected AudioClip m_GunEmptyMagazineSound;
 
     [Header("VFX")]
-    [SerializeField] protected ParticleSystem muzzleFlash;
+    [SerializeField] protected ParticleSystem m_MuzzleFlash;
 
     [Header("Gun Stats")]
-    [SerializeField] protected float fireRate;
-    [SerializeField] protected int magazineSize;
-    [SerializeField] protected int startingAmmo;
+    [SerializeField] protected int m_Damage;
+    [SerializeField] protected float m_FireRate;
+    [SerializeField] protected int m_MagazineSize;
+    [SerializeField] protected int m_StartingAmmo;
+
+    protected float m_ReloadSpeed;
+    protected AudioSource m_AudioSource;
+    protected Transform m_Barrel;
 
     private float m_FireDelay;
-    private Transform barrel;
-    private bool isReloading;
-    private int projectilesInMagazine;
-    private int totalAmmo;
-    protected float reloadSpeed;
-    protected AudioSource audioSource;
-
+    private bool m_IsReloading;
+    private int m_ProjectilesInMagazine;
+    private int m_TotalAmmo;
+    
     public abstract void FireWeapon();
 
     //Getters
     //TODO Are these needed?
-    public int GetMagazineSize() { return magazineSize; }
-    public int GetProjectilesInMagazine() { return projectilesInMagazine; }
-    public int GetTotalAmmo() { return totalAmmo; }
-    public float GetReloadSpeed() { return reloadSpeed; }
-    public float GetFireRate() { return fireRate; }
-    public Transform GetBarrel() { return barrel; }
-    public bool GetIsReloading() { return isReloading; }
-    public int GetStartingAmmo() { return startingAmmo; }
+    public int GetMagazineSize() { return m_MagazineSize; }
+    public int GetProjectilesInMagazine() { return m_ProjectilesInMagazine; }
+    public int GetTotalAmmo() { return m_TotalAmmo; }
+    public float GetReloadSpeed() { return m_ReloadSpeed; }
+    public float GetFireRate() { return m_FireRate; }
+    public Transform GetBarrel() { return m_Barrel; }
+    public bool GetIsReloading() { return m_IsReloading; }
+    public int GetStartingAmmo() { return m_StartingAmmo; }
 
-    public void SetTotalAmmo(int ammoToAdd) { totalAmmo = ammoToAdd; }
+    public void SetTotalAmmo(int ammoToAdd) { m_TotalAmmo = ammoToAdd; }
 
     // Start is called before the first frame update
-    virtual public void Start()
+    void Start()
     {
-        barrel = transform.Find("Barrel").transform;
-        audioSource = GetComponent<AudioSource>();
-        projectilesInMagazine = magazineSize;
-        isReloading = false;
-        reloadSpeed = m_GunReloadSound.length;
-        totalAmmo = startingAmmo;
+        m_Barrel = transform.Find("Barrel").transform;
+        m_AudioSource = GetComponent<AudioSource>();
+        m_ProjectilesInMagazine = m_MagazineSize;
+        m_IsReloading = false;
+        m_ReloadSpeed = m_GunReloadSound.length;
+        m_TotalAmmo = m_StartingAmmo;
         m_FireDelay = 0;
     }
 
@@ -59,26 +61,26 @@ public abstract class Weapon : MonoBehaviour
 
     protected void ReduceProjectileInMagazine()
     {
-        projectilesInMagazine--;
+        m_ProjectilesInMagazine--;
     }
 
     public IEnumerator Reload()
     {
         //TODO Make it so that reload sfx cant be played agin whilst reloading 
 
-        if(totalAmmo > 0 && projectilesInMagazine != magazineSize)
+        if(m_TotalAmmo > 0 && m_ProjectilesInMagazine != m_MagazineSize)
         {
-            isReloading = true;
+            m_IsReloading = true;
 
             //Play the reload sound
-            audioSource.PlayOneShot(m_GunReloadSound);
+            m_AudioSource.PlayOneShot(m_GunReloadSound);
 
             //Wait a few seconds to emualte a reload delay
-            yield return new WaitForSeconds(reloadSpeed);
+            yield return new WaitForSeconds(m_ReloadSpeed);
 
             DeductTotalAmmo();
 
-            isReloading = false;
+            m_IsReloading = false;
         }
     }
 
@@ -86,17 +88,17 @@ public abstract class Weapon : MonoBehaviour
     {
         //Create a variable which saves the total magazine size subtracted by
         //the current bullets in the mag to find out how many bullets have been fired
-        int ammoFired = magazineSize - projectilesInMagazine;
+        int ammoFired = m_MagazineSize - m_ProjectilesInMagazine;
 
         //If total ammo is greater than or equal to the ammo fired, then ammo to deduct
         //will equal the ammo fired, otherwise it will be equal to just the total ammo
-        int totalAmmoToDeduct = (totalAmmo >= ammoFired) ? ammoFired : totalAmmo;
+        int totalAmmoToDeduct = (m_TotalAmmo >= ammoFired) ? ammoFired : m_TotalAmmo;
 
         //Reduce the total ammo
-        totalAmmo -= totalAmmoToDeduct;
+        m_TotalAmmo -= totalAmmoToDeduct;
 
         //Whatever is taken away from totalAmmo, should be added to projectilesInMag
-        projectilesInMagazine += totalAmmoToDeduct;
+        m_ProjectilesInMagazine += totalAmmoToDeduct;
     }
 
     public void Shoot()
@@ -104,19 +106,23 @@ public abstract class Weapon : MonoBehaviour
         if(m_FireDelay <= 0)
         {
             //If there are bullets in the mag and the player isn't reloading
-            if (projectilesInMagazine > 0 && isReloading == false)
+            if (m_ProjectilesInMagazine > 0 && m_IsReloading == false)
             {
+                //Play the firing sound effect
+                m_AudioSource.PlayOneShot(m_GunFireSound);
+
+                ReduceProjectileInMagazine();
                 ShowMuzzleFlash();
                 FireWeapon();
 
                 //Reset the delay
-                m_FireDelay = fireRate;
+                m_FireDelay = m_FireRate;
             }
             //Otherwise, if there are no bullets in the magazine, and the player isn't reloading
-            else if (projectilesInMagazine == 0 && isReloading == false)
+            else if (m_ProjectilesInMagazine == 0 && m_IsReloading == false)
             {
                 //Give the player feedback that they need to reload
-                audioSource.PlayOneShot(m_GunEmptyMagazineSound);
+                m_AudioSource.PlayOneShot(m_GunEmptyMagazineSound);
 
                 //Make it so that the empty magazine sound is played at a regular rate
                 m_FireDelay = 1.0f;
@@ -127,10 +133,15 @@ public abstract class Weapon : MonoBehaviour
     private void ShowMuzzleFlash()
     {
         //Spawn the muzzle flash
-        ParticleSystem tempMuzzleFlash = Instantiate(muzzleFlash, barrel.transform.position, barrel.transform.rotation);
+        ParticleSystem tempMuzzleFlash = Instantiate(m_MuzzleFlash, m_Barrel.transform.position, m_Barrel.transform.rotation);
         tempMuzzleFlash.Play();
 
         //Destroy the muzzle flash after a small period
         Destroy(tempMuzzleFlash.gameObject, 0.02f);
+    }
+
+    public void Aim(Vector3 aim)
+    {
+        transform.LookAt(aim);
     }
 }

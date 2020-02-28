@@ -15,8 +15,7 @@ public class AmmoUI : MonoBehaviour
     private TextMeshProUGUI m_MaxAmmoText;
     private TextMeshProUGUI m_CurrentAmmoText;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         m_MaxAmmoUI = gameObject.transform.GetChild(0).gameObject;
         m_CurrentAmmoUI = gameObject.transform.GetChild(1).gameObject;

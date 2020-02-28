@@ -12,7 +12,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameMangerInstance;
-    private bool isPaused;
+    private static bool isPaused;
     public static GameManager Instance()
     {
         if (m_GameMangerInstance == null)
@@ -34,21 +34,30 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void PauseGame(bool paused)
+    public void PauseGame()
     {
-        if (paused)
-        {
-            Time.timeScale = 0f;
-            Debug.Log("Game Paused!");
-            SceneHandler.Instance().LoadSceneByName("Pause Menu", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        }
+        if (isPaused)
+            ResumeGame();
+        else
+            RunPauseFunctionality();
     }
 
-    
-
-    public bool GetIsPaused()
+    private void RunPauseFunctionality()
     {
-        //TODO remains false at all times when calling the instance of the class in other scripts because that function is static (I think) Maybe use bool isPaused argument in paused function 
-        return isPaused;
+        Time.timeScale = 0f;
+        SceneHandler.Instance().LoadSceneByName("Pause Menu", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        isPaused = true;
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        SceneHandler.Instance().RemoveScene("Pause Menu");
+        isPaused = false;
+    }
+
+    public void SetIsPaused(bool set)
+    {
+        isPaused = set;
     }
 }

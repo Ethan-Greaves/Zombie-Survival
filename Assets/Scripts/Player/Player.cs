@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float speed = 5f;
-    [SerializeField] Camera cam;
-    [SerializeField] Transform hand;
+    [SerializeField] Camera m_Camera;
 
-    private Vector3 vectorInput;
-    private Vector3 mousePos;
-    private Rigidbody playerRB;
-    private WeaponController weaponController;
+    private Vector3 m_MousePos;
+    private WeaponController m_WeaponController;
     private int m_Health;
-    private Animator m_Animator;
 
     //Getters
     public int GetHealth() { return m_Health; }
@@ -26,41 +21,17 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Acquire the player game object's Rigidbody component and save it.
-        playerRB = GetComponent<Rigidbody>();
-        weaponController = GetComponent<WeaponController>();
-        m_Animator = GetComponent<Animator>();
+        m_WeaponController = GetComponent<WeaponController>();
         m_Health = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetInput();
         AimAtMouse();
         CheckFireWeapon();
         CheckReload();
         CheckPauseGame();
-
-        Debug.Log(GameManager.Instance().GetIsPaused());
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
-    private void Move()
-    {
-        playerRB.AddForce(vectorInput * speed * Time.fixedDeltaTime);
-        //m_Animator.SetFloat("Movement", vectorInput.z);
-        //m_Animator.SetFloat("Strafing", vectorInput.x);
-    }
-
-    private void GetInput()
-    {
-        vectorInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0,
-                                            Input.GetAxisRaw("Vertical"));
     }
 
     private void AimAtMouse()
@@ -68,7 +39,7 @@ public class Player : MonoBehaviour
         float rayDistance;
 
         //Create a ray which starts at the camera and goes through the mouses position
-        Ray camToMouseRay = cam.ScreenPointToRay(Input.mousePosition);
+        Ray camToMouseRay = m_Camera.ScreenPointToRay(Input.mousePosition);
 
         //Create a plane so that the ray can be intersected. 
         Plane plane = new Plane(Vector3.up, transform.position);
@@ -81,32 +52,37 @@ public class Player : MonoBehaviour
 
             //Have the player look at the point on the x and z axis.
             transform.LookAt(new Vector3(point.x, transform.position.y, point.z));
+
+            // Check when the mouse is near the player and as such make the gun stop looking to avoid weird rotation
+            CheckGunToMouseDistance(point);
         }
+    }
+
+    private void CheckGunToMouseDistance(Vector3 point)
+    {
+        float StopLookingDistance = 4.0f;
+        if (Vector2.Distance(new Vector2(point.x, point.z), 
+                             new Vector2(transform.position.x, transform.position.z)) > StopLookingDistance)
+            m_WeaponController.Aim(point);
     }
 
     private void CheckFireWeapon()
     {
         //If left mouse button was pressed
         if (Input.GetMouseButton(0))
-        {
-            weaponController.Shoot();
-        }
+            m_WeaponController.Shoot();
     }
 
     private void CheckReload()
     {
         //If 'R' was pressed
         if (Input.GetKeyDown(KeyCode.R))
-        {
-            weaponController.Reload();
-        }
+            m_WeaponController.Reload();
     }
 
     private void CheckPauseGame()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameManager.Instance().PauseGame(true);
-        }
+            GameManager.Instance().PauseGame();
     }
 }

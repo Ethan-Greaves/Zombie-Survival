@@ -49,6 +49,7 @@ public class SceneHandler : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        GameManager.Instance().SetIsPaused(false);
         int startMenu = 0;
         SceneManager.LoadScene(startMenu);
     }
