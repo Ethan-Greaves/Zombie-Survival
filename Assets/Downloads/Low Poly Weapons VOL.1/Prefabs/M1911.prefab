@@ -238,10 +238,10 @@ MonoBehaviour:
     type: 3}
   m_MuzzleFlash: {fileID: 1306024301257001089, guid: 06e8658c39a235d49b066039af38b4ed,
     type: 3}
-  m_Damage: 10
-  m_FireRate: 0.075
-  m_MagazineSize: 30
-  m_StartingAmmo: 10
+  m_Damage: 25
+  m_FireRate: 0.75
+  m_MagazineSize: 5
+  m_StartingAmmo: 100
   m_BulletDistance: 100
   m_ImpactForce: 0
 --- !u!82 &2887317207313471191

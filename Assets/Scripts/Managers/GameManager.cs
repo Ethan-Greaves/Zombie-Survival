@@ -13,10 +13,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameMangerInstance;
     private static bool isPaused;
+
     public static GameManager Instance()
     {
         if (m_GameMangerInstance == null)
-            m_GameMangerInstance = new GameManager();
+        {
+            m_GameMangerInstance = new GameObject("Game Manager", typeof(GameManager)).GetComponent<GameManager>();
+        }
 
         return m_GameMangerInstance;
     }
@@ -24,14 +27,15 @@ public class GameManager : MonoBehaviour
     //Used for initialising variables or game states
     private void Awake()
     {
-        m_GameMangerInstance = new GameManager();
+        DontDestroyOnLoad(this.gameObject);
         isPaused = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //TODO find way to initialise a music audio clip var without using inspector (through code)
+        //SoundManager.Instance().PlayMusic()
     }
 
     public void PauseGame()

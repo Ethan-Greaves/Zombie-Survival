@@ -6,32 +6,40 @@ public class Player : MonoBehaviour
 {
     [SerializeField] Camera m_Camera;
 
-    private Vector3 m_MousePos;
-    private WeaponController m_WeaponController;
     private int m_Health;
+    private Vector3 m_MousePos;
+    private Vector3 m_VectorInput;
+    private PlayerInput m_PlayerInput;
+    private PlayerMovement m_PlayerMovement;
+    private PlayerAnimation m_PlayerAnimation;
+    private WeaponController m_WeaponController;
 
     //Getters
     public int GetHealth() { return m_Health; }
 
     private void Awake()
     {
-        
+        m_Health = 100;
+        m_PlayerInput = GetComponent<PlayerInput>();
+        m_PlayerMovement = GetComponent<PlayerMovement>();
+        m_PlayerAnimation = GetComponent<PlayerAnimation>();
+        m_WeaponController = GetComponent<WeaponController>();
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        m_WeaponController = GetComponent<WeaponController>();
-        m_Health = 100;
-    }
+    void Start(){}
 
     // Update is called once per frame
     void Update()
     {
         AimAtMouse();
-        CheckFireWeapon();
-        CheckReload();
-        CheckPauseGame();
+        m_PlayerInput.AllInputs(m_WeaponController, ref m_VectorInput);
+        m_PlayerAnimation.AddAnimation(ref m_VectorInput);
+    }
+
+    void FixedUpdate()
+    {
+        m_PlayerMovement.Move(ref m_VectorInput);
     }
 
     private void AimAtMouse()
@@ -60,29 +68,11 @@ public class Player : MonoBehaviour
 
     private void CheckGunToMouseDistance(Vector3 point)
     {
-        float StopLookingDistance = 4.0f;
+        float StopLookingDistance = 2.5f;
         if (Vector2.Distance(new Vector2(point.x, point.z), 
                              new Vector2(transform.position.x, transform.position.z)) > StopLookingDistance)
             m_WeaponController.Aim(point);
     }
 
-    private void CheckFireWeapon()
-    {
-        //If left mouse button was pressed
-        if (Input.GetMouseButton(0))
-            m_WeaponController.Shoot();
-    }
-
-    private void CheckReload()
-    {
-        //If 'R' was pressed
-        if (Input.GetKeyDown(KeyCode.R))
-            m_WeaponController.Reload();
-    }
-
-    private void CheckPauseGame()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            GameManager.Instance().PauseGame();
-    }
+    
 }

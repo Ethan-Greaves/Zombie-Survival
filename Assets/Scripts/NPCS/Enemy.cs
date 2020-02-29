@@ -16,13 +16,12 @@ public abstract class Enemy : MonoBehaviour
     [Header("SFX")]
     [SerializeField] protected AudioClip[] m_EnemyNoises;
     [SerializeField] protected float m_EnemyNoiseRate;
-    [SerializeField] protected AudioClip[] m_EnemyDamageTakenSFX;
+    [SerializeField] protected AudioClip m_EnemyDamageTakenSFX;
 
     [Header("Misc")]
     [SerializeField] protected Player m_Player;
     
     protected float m_EnemyNoiseDelay;
-    protected AudioSource m_AudioSource;
 
     private NavMeshAgent m_NavMeshAgent;
     private Rigidbody m_RigidBody;
@@ -37,12 +36,9 @@ public abstract class Enemy : MonoBehaviour
         m_EnemyNoiseDelay = m_EnemyNoiseRate;
         m_Health = 100;
 
-        m_AudioSource = GetComponent<AudioSource>();
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
         m_Animator = GetComponent<Animator>();
         m_RigidBody = GetComponent<Rigidbody>();
-
-
     }
 
     // Update is called once per frame
@@ -68,18 +64,22 @@ public abstract class Enemy : MonoBehaviour
 
     private void TakeDamageVFX()
     {
-        //Spawn the vfx
-        ParticleSystem tempTakeDamageVFX = Instantiate(m_TakeDamageVFX, gameObject.transform.position, gameObject.transform.rotation);
-        tempTakeDamageVFX.Play();
+        if (m_TakeDamageVFX != null)
+        {
+            //Spawn the vfx
+            ParticleSystem tempTakeDamageVFX = Instantiate(m_TakeDamageVFX, gameObject.transform.position, gameObject.transform.rotation);
+            tempTakeDamageVFX.Play();
 
-        //Destroy the VFX after a small period
-        Destroy(tempTakeDamageVFX.gameObject, 0.2f);
+            //Destroy the VFX after a small period
+            Destroy(tempTakeDamageVFX.gameObject, 0.2f);
+        }
+        else
+            Debug.LogWarning("m_TakeDamageVFX Has not been assigned!!!");
     }
 
     private void TakeDamageSFX()
     {
-        m_AudioSource.Stop();
-        m_AudioSource.PlayOneShot(m_EnemyDamageTakenSFX[Random.Range(0, m_EnemyDamageTakenSFX.Length - 1)]);
+        SoundManager.Instance().PlaySFX(m_EnemyDamageTakenSFX);
     }
 
     private void PlayNoisesSFX()
@@ -89,7 +89,7 @@ public abstract class Enemy : MonoBehaviour
         if (m_EnemyNoiseDelay <= 0)
         {
             m_EnemyNoiseDelay = m_EnemyNoiseRate;
-            m_AudioSource.PlayOneShot(m_EnemyNoises[Random.Range(0, m_EnemyNoises.Length - 1)]);
+            SoundManager.Instance().PlayRandomSFX(m_EnemyNoises);
         }
     }
 
