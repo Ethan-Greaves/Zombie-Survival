@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     private static GameManager m_GameMangerInstance;
     private static bool m_bIsPaused;
     private static int m_iScore = 0;
-
     private int m_iNumOfEnemies;
 
     public static GameManager Instance()
@@ -25,9 +24,7 @@ public class GameManager : MonoBehaviour
         return m_GameMangerInstance;
     }
 
-    //  -------------------------------------------------------------------------------------------------------------------
-    //                                                  INITILISATION
-    //  -------------------------------------------------------------------------------------------------------------------
+    #region INITILISATION
 
     //Used for initialising variables or game states
     private void Awake()
@@ -43,11 +40,9 @@ public class GameManager : MonoBehaviour
         //SoundManager.Instance().PlayMusic()
     }
 
-    //  -------------------------------------------------------------------------------------------------------------------
+    #endregion
 
-    //  -------------------------------------------------------------------------------------------------------------------
-    //                                                  PAUSE FUNCTIONS
-    //  -------------------------------------------------------------------------------------------------------------------
+    #region PAUSE FUNCTIONALITY
     public void PauseGame()
     {
         if (m_bIsPaused)
@@ -75,17 +70,14 @@ public class GameManager : MonoBehaviour
         m_bIsPaused = set;
     }
 
-    //  -------------------------------------------------------------------------------------------------------------------
+    #endregion
 
-    //  -------------------------------------------------------------------------------------------------------------------
-    //                                              SCORE FUNCTIONS
-    //  -------------------------------------------------------------------------------------------------------------------
+    #region SCORE FUNCTIONALITY
 
     public int GetScore() { return m_iScore; }
     public void ResetScore() { m_iScore = 0; }
-    public void AddScore(int scoreToAdd) { m_iScore += scoreToAdd; } 
+    public void AddScore(int scoreToAdd) { m_iScore += scoreToAdd; }
 
-    //  -------------------------------------------------------------------------------------------------------------------
-
+    #endregion
 
 }
