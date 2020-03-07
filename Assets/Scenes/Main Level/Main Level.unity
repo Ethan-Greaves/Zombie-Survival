@@ -1283,6 +1283,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152640550}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1169364816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 162410, guid: 016e7bf62a334b6408f97e97b5e49ec7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8551499542056403231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1169364817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169364816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96894079abe583c4bb2121c9f08378f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1169364818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169364816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32566e067efb1a4e88d0da0154f5dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TakeDamageVFX: {fileID: 5506757148536559197, guid: 496351b5fd0f77d4385726844e5d7077,
+    type: 3}
 --- !u!1 &1187418609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,15 +2126,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1475017140331337610, guid: 016e7bf62a334b6408f97e97b5e49ec7,
+    - target: {fileID: 5950127889914197889, guid: 016e7bf62a334b6408f97e97b5e49ec7,
         type: 3}
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1304210545}
-    - target: {fileID: 1475017140331337610, guid: 016e7bf62a334b6408f97e97b5e49ec7,
-        type: 3}
-      propertyPath: m_EnemyDamageTakenSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 439a42639c541da46a3724807716710c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 016e7bf62a334b6408f97e97b5e49ec7, type: 3}
