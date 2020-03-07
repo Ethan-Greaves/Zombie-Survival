@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class Weapon : MonoBehaviour
 {
     [Header("Gun Sounds")]
@@ -19,7 +20,6 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected int m_StartingAmmo;
 
     protected float m_ReloadSpeed;
-    protected AudioSource m_AudioSource;
     protected Transform m_Barrel;
 
     private float m_FireDelay;
@@ -46,7 +46,6 @@ public abstract class Weapon : MonoBehaviour
     void Start()
     {
         m_Barrel = transform.Find("Barrel").transform;
-        m_AudioSource = GetComponent<AudioSource>();
         m_ProjectilesInMagazine = m_MagazineSize;
         m_IsReloading = false;
         m_ReloadSpeed = m_GunReloadSound.length;
@@ -73,7 +72,7 @@ public abstract class Weapon : MonoBehaviour
             m_IsReloading = true;
 
             //Play the reload sound
-            m_AudioSource.PlayOneShot(m_GunReloadSound);
+            SoundManager.Instance().PlaySFX(m_GunReloadSound);
 
             //Wait a few seconds to emualte a reload delay
             yield return new WaitForSeconds(m_ReloadSpeed);
@@ -109,7 +108,7 @@ public abstract class Weapon : MonoBehaviour
             if (m_ProjectilesInMagazine > 0 && m_IsReloading == false)
             {
                 //Play the firing sound effect
-                m_AudioSource.PlayOneShot(m_GunFireSound);
+                SoundManager.Instance().PlaySFX(m_GunFireSound);
 
                 ReduceProjectileInMagazine();
                 ShowMuzzleFlash();
@@ -122,7 +121,7 @@ public abstract class Weapon : MonoBehaviour
             else if (m_ProjectilesInMagazine == 0 && m_IsReloading == false)
             {
                 //Give the player feedback that they need to reload
-                m_AudioSource.PlayOneShot(m_GunEmptyMagazineSound);
+                SoundManager.Instance().PlaySFX(m_GunEmptyMagazineSound);
 
                 //Make it so that the empty magazine sound is played at a regular rate
                 m_FireDelay = 1.0f;

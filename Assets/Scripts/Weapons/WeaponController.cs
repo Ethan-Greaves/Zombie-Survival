@@ -26,6 +26,7 @@ public class WeaponController : MonoBehaviour
     {
         if (equippedWeapon != null)
             StartCoroutine(equippedWeapon.Reload());
+            
     }
 
     public void EquipWeapon(Weapon weaponToEquip)

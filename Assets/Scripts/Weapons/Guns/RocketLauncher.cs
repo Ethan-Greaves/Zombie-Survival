@@ -44,9 +44,6 @@ public class RocketLauncher : Weapon
 
     override public void FireWeapon()
     {
-        //Play the firing sound effect
-        m_AudioSource.PlayOneShot(m_GunFireSound);
-
         ReduceProjectileInMagazine();
 
         Instantiate(m_RocketProjectile, GetBarrel().transform.position, GetBarrel().rotation);
