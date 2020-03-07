@@ -11,15 +11,18 @@ public class EnemyAnimation : MonoBehaviour
         m_Animator = GetComponent<Animator>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartMovingAnimation()
     {
-        
+        m_Animator.SetBool("isMoving", true);
+    }
+    public void StartIdleAnimation()
+    {
+        m_Animator.SetBool("isMoving", false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartAttackAnimation()
     {
-
+        m_Animator.SetBool("isMoving", false);
+        m_Animator.SetBool("isAttacking", true);
     }
 }

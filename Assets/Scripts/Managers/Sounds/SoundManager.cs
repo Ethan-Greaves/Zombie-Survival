@@ -37,18 +37,23 @@ public class SoundManager : MonoBehaviour
         m_MusicAudioSource.loop = true;
     }
 
+    #region MUSIC
     public void PlayMusic(AudioClip musicClip)
     {
         m_MusicAudioSource.clip = musicClip;
         m_MusicAudioSource.Play();
     }
 
+    #endregion
+
+    #region SOUND EFFECTS
     public void PlaySFX(AudioClip SFXClip)
     {
         m_SFXAudioSource.PlayOneShot(SFXClip);
     }
     public void PlaySFX(AudioClip SFXClip, float volume)
     {
+        m_SFXAudioSource.Stop();
         m_SFXAudioSource.PlayOneShot(SFXClip, volume);
     }
 
@@ -56,5 +61,12 @@ public class SoundManager : MonoBehaviour
     {
         m_SFXAudioSource.PlayOneShot(SFXClips[Random.Range(0, SFXClips.Length - 1)]);
     }
+
+    public void StopSFX()
+    {
+        m_SFXAudioSource.Stop();
+    }
+
+    #endregion
 }
 

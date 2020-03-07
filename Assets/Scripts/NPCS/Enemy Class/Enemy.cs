@@ -7,7 +7,6 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] protected int m_MoveSpeed;
     [SerializeField] protected int m_Damage;
     [SerializeField] protected int m_Health;
 
@@ -34,6 +33,7 @@ public abstract class Enemy : MonoBehaviour
     {
         m_EnemySFX.PlayNoisesSFX();
         CheckToKillEnemy();
+        TieAnimationToStates();
     }
 
     public void TakeDamage(int damage)
@@ -58,6 +58,18 @@ public abstract class Enemy : MonoBehaviour
     private void DropPowerupOnDeath()
     {
 
+    }
+
+    private void TieAnimationToStates()
+    {
+        if (m_EnemyAI.GetCurrentState() == State.IDLE)
+            m_EnemyAnimation.StartIdleAnimation();
+
+        else if (m_EnemyAI.GetCurrentState() == State.CHASING)
+            m_EnemyAnimation.StartMovingAnimation();
+
+        //else if (m_EnemyAI.GetCurrentState() == State.ATTACKING)
+        //    m_EnemyAnimation.StartAttackAnimation();
     }
 
 }
