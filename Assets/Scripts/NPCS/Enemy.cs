@@ -57,9 +57,12 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        m_Health  -= damage;
-        TakeDamageVFX();
-        TakeDamageSFX();
+        if(this.gameObject != null)
+        {
+            m_Health -= damage;
+            TakeDamageVFX();
+            TakeDamageSFX();
+        }
     }
 
     private void TakeDamageVFX()
@@ -97,6 +100,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if(m_Health <= 0)
         {
+            GameManager.Instance().AddScore(5);
             Destroy(gameObject);
         }
     }

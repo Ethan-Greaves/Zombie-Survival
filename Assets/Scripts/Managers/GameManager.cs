@@ -12,23 +12,28 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameMangerInstance;
-    private static bool isPaused;
+    private static bool m_bIsPaused;
+    private static int m_iScore = 0;
+
+    private int m_iNumOfEnemies;
 
     public static GameManager Instance()
     {
         if (m_GameMangerInstance == null)
-        {
             m_GameMangerInstance = new GameObject("Game Manager", typeof(GameManager)).GetComponent<GameManager>();
-        }
 
         return m_GameMangerInstance;
     }
+
+    //  -------------------------------------------------------------------------------------------------------------------
+    //                                                  INITILISATION
+    //  -------------------------------------------------------------------------------------------------------------------
 
     //Used for initialising variables or game states
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        isPaused = false;
+        m_bIsPaused = false;
     }
 
     // Start is called before the first frame update
@@ -38,9 +43,14 @@ public class GameManager : MonoBehaviour
         //SoundManager.Instance().PlayMusic()
     }
 
+    //  -------------------------------------------------------------------------------------------------------------------
+
+    //  -------------------------------------------------------------------------------------------------------------------
+    //                                                  PAUSE FUNCTIONS
+    //  -------------------------------------------------------------------------------------------------------------------
     public void PauseGame()
     {
-        if (isPaused)
+        if (m_bIsPaused)
             ResumeGame();
         else
             RunPauseFunctionality();
@@ -50,18 +60,32 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         SceneHandler.Instance().LoadSceneByName("Pause Menu", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        isPaused = true;
+        m_bIsPaused = true;
     }
 
     private void ResumeGame()
     {
         Time.timeScale = 1f;
         SceneHandler.Instance().RemoveScene("Pause Menu");
-        isPaused = false;
+        m_bIsPaused = false;
     }
 
     public void SetIsPaused(bool set)
     {
-        isPaused = set;
+        m_bIsPaused = set;
     }
+
+    //  -------------------------------------------------------------------------------------------------------------------
+
+    //  -------------------------------------------------------------------------------------------------------------------
+    //                                              SCORE FUNCTIONS
+    //  -------------------------------------------------------------------------------------------------------------------
+
+    public int GetScore() { return m_iScore; }
+    public void ResetScore() { m_iScore = 0; }
+    public void AddScore(int scoreToAdd) { m_iScore += scoreToAdd; } 
+
+    //  -------------------------------------------------------------------------------------------------------------------
+
+
 }
