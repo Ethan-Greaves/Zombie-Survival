@@ -4,34 +4,42 @@ using UnityEngine;
 
 public abstract class Pickup : MonoBehaviour
 {
-    [SerializeField] protected Player m_PlayerCharacter;
     [SerializeField] protected AudioClip m_PickupSFX;
-
-    protected AudioSource m_AudioSource;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_AudioSource = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] protected ParticleSystem m_PickupVFX;
 
     private void OnTriggerEnter(Collider other)
     {
-        //Play SFX
-        //m_AudioSource.PlayOneShot(m_PickupSFX);
+        if(other.gameObject.tag == "Player")
+        {
+            //Play SFX
+            SoundManager.Instance().PlaySFX(m_PickupSFX);
 
-        //Play VFX
+            //Play VFX
+            PlayPickupVFX();
 
+            //Apply action to player
+            PickupAction(other);
 
-        PickupAction();
-        Destroy(gameObject);
+            //Delete Pickup
+            Destroy(gameObject);
+        }
     }
 
-    protected abstract void PickupAction();
+    protected abstract void PickupAction(Collider player);
+
+    private void PlayPickupVFX()
+    {
+        if (m_PickupVFX == null)
+        {
+            Debug.LogWarning("VFX not added to " + gameObject.name);
+            return;
+        }
+        else
+        {
+            ParticleSystem tempVFX = Instantiate(m_PickupVFX, transform.position, m_PickupVFX.transform.rotation);
+            tempVFX.Play();
+
+            Destroy(tempVFX, m_PickupVFX.main.duration);
+        }
+    }
 }

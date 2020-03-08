@@ -10,6 +10,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int m_Damage;
     [SerializeField] protected int m_Health;
 
+    [Header("Pickups To Drop")]
+    [SerializeField] Pickup[] m_PickupsToDrop;   
+
     protected EnemySFX m_EnemySFX;
     protected EnemyAI m_EnemyAI;
     protected EnemyAnimation m_EnemyAnimation;
@@ -50,6 +53,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if(m_Health <= 0)
         {
+            DropPowerupOnDeath();
             GameManager.Instance().AddScore(5);
             Destroy(gameObject);
         }
@@ -57,7 +61,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void DropPowerupOnDeath()
     {
-
+        Instantiate(m_PickupsToDrop[Random.Range(0, m_PickupsToDrop.Length)], transform.position, transform.rotation);
     }
 
     private void TieAnimationToStates()

@@ -18,6 +18,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float m_FireRate;
     [SerializeField] protected int m_MagazineSize;
     [SerializeField] protected int m_StartingAmmo;
+    [SerializeField] float m_BulletDistance = 100.0f;
+
 
     protected float m_ReloadSpeed;
     protected Transform m_Barrel;
@@ -142,5 +144,22 @@ public abstract class Weapon : MonoBehaviour
     public void Aim(Vector3 aim)
     {
         transform.LookAt(aim);
+    }
+
+    protected void CreateRayCast()
+    {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(m_Barrel.transform.position, m_Barrel.transform.forward, out hitInfo, m_BulletDistance))
+        {
+            Debug.Log(hitInfo.transform.name);
+
+            //Acquire the enemy
+            Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(m_Damage);
+            }
+        }
     }
 }

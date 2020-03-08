@@ -4,23 +4,11 @@ using UnityEngine;
 
 public class AmmoPickup : Pickup
 {
-    private WeaponController m_WeaponController;
-    private Weapon m_PlayersEquippedWeapon;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void PickupAction(Collider player)
     {
-        m_WeaponController = m_PlayerCharacter.GetComponent<WeaponController>();
-    }
+        WeaponController weaponController = player.GetComponent<WeaponController>();
+        Weapon playersEquippedWeapon = weaponController.GetEquippedWeapon();
 
-    // Update is called once per frame
-    void Update()
-    {
-        m_PlayersEquippedWeapon = m_WeaponController.GetEquippedWeapon();
-    }
-
-    protected override void PickupAction()
-    {
-        m_PlayersEquippedWeapon.SetTotalAmmo(m_PlayersEquippedWeapon.GetStartingAmmo());
+        playersEquippedWeapon.SetTotalAmmo(playersEquippedWeapon.GetStartingAmmo());
     }
 }
