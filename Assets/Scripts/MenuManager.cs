@@ -9,7 +9,7 @@ using UnityEngine.Audio;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] AudioMixer m_MasterVolumeAudioMixer;
-    [SerializeField] GameObject m_SettingsMenu;
+    //[SerializeField] GameObject m_SettingsMenu;
     [SerializeField] TMPro.TMP_Dropdown m_ResolutionDropdown;
 
     private Resolution[] m_Resolutions;

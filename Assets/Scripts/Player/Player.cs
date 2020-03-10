@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        m_Health = 100;
         m_PlayerInput = GetComponent<PlayerInput>();
         m_PlayerMovement = GetComponent<PlayerMovement>();
         m_PlayerAnimation = GetComponent<PlayerAnimation>();
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
-        m_Health = 100;
+       
 
     }
 
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
 
     private void CheckGunToMouseDistance(Vector3 point)
     {
-        float StopLookingDistance = 2.5f;
+        float StopLookingDistance = 4.5f;
         if (Vector2.Distance(new Vector2(point.x, point.z), 
                              new Vector2(transform.position.x, transform.position.z)) > StopLookingDistance)
             m_WeaponController.Aim(point);

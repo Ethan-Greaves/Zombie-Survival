@@ -12,6 +12,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameMangerInstance;
+    private SceneHandler m_SceneHandler;
+
     private static bool m_bIsPaused;
     private static int m_iScore = 0;
     private int m_iNumOfEnemies;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         m_bIsPaused = false;
+        m_SceneHandler = Resources.Load<SceneHandler>("SceneManager");
     }
 
     // Start is called before the first frame update
@@ -54,14 +57,14 @@ public class GameManager : MonoBehaviour
     private void RunPauseFunctionality()
     {
         Time.timeScale = 0f;
-        SceneHandler.Instance().LoadSceneByName("Pause Menu", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        m_SceneHandler.LoadSceneByNameAdditive("Pause Menu");
         m_bIsPaused = true;
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
-        SceneHandler.Instance().RemoveScene("Pause Menu");
+        m_SceneHandler.RemoveScene("Pause Menu");
         m_bIsPaused = false;
     }
 
@@ -77,7 +80,6 @@ public class GameManager : MonoBehaviour
     public int GetScore() { return m_iScore; }
     public void ResetScore() { m_iScore = 0; }
     public void AddScore(int scoreToAdd) { m_iScore += scoreToAdd; }
-
     #endregion
 
 }
