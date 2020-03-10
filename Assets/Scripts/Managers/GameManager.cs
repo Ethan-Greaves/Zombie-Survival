@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         m_bIsPaused = true;
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1f;
         SceneHandler.Instance().RemoveScene("Pause Menu");
