@@ -39,7 +39,7 @@ public abstract class Pickup : MonoBehaviour
             ParticleSystem tempVFX = Instantiate(m_PickupVFX, transform.position, m_PickupVFX.transform.rotation);
             tempVFX.Play();
 
-            Destroy(tempVFX, m_PickupVFX.main.duration);
+            Destroy(tempVFX, 1f) ;
         }
     }
 }

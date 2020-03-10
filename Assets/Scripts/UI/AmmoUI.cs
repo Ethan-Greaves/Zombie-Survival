@@ -34,4 +34,9 @@ public class AmmoUI : MonoBehaviour
         m_MaxAmmoText.text = m_CurrentlyEquippedWeapon.GetTotalAmmo().ToString();
         m_CurrentAmmoText.text = m_CurrentlyEquippedWeapon.GetProjectilesInMagazine().ToString() + " /";
     }
+
+    private void LateUpdate()
+    {
+        
+    }
 }

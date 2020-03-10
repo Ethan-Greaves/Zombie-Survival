@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        m_Health = 100;
         m_PlayerInput = GetComponent<PlayerInput>();
         m_PlayerMovement = GetComponent<PlayerMovement>();
         m_PlayerAnimation = GetComponent<PlayerAnimation>();
@@ -27,7 +26,10 @@ public class Player : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start(){}
+    void Start(){
+        m_Health = 100;
+
+    }
 
     // Update is called once per frame
     void Update()
