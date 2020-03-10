@@ -48,13 +48,7 @@ public class SceneHandler : ScriptableObject
 
     public void RemoveScene(string sceneName)
     {
-<<<<<<< HEAD
-        GameManager.Instance().ResumeGame();
-        int startMenu = 0;
-        SceneManager.LoadScene(startMenu);
-=======
         SceneManager.UnloadSceneAsync(sceneName);
->>>>>>> Menus
     }
 
     public void LoadMenu()
