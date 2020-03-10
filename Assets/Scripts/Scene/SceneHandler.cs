@@ -3,60 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneHandler : MonoBehaviour
+[CreateAssetMenu(fileName = "SceneManager")]
+public class SceneHandler : ScriptableObject
 {
+    //Create a stack to store all previous scenes
+    private Stack<int> m_LoadedLevels;
 
-    static SceneHandler m_SceneHandlerInstance;
+    [System.NonSerialized]
+    private bool m_Initialised;
 
-    //Used for initialising variables or game states
-    private void Awake()
+    private void OnEnable()
     {
-        m_SceneHandlerInstance = new SceneHandler();
+        m_LoadedLevels = new Stack<int>();
+        m_Initialised = true;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public UnityEngine.SceneManagement.Scene GetActiveScene()
     {
-
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene();
     }
 
-    public static SceneHandler Instance()
-    {
-        if(m_SceneHandlerInstance == null)
-        {
-            m_SceneHandlerInstance = new SceneHandler();
-        }
 
-        return m_SceneHandlerInstance;
+    public void LoadSceneByNameSingle(string sceneName)
+    {
+        //Put the current scene onto the stack, essentially saving it
+        m_LoadedLevels.Push(GetActiveScene().buildIndex);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
-    public void LoadNextScene()
+    public void LoadSceneByNameAdditive(string sceneName)
     {
-        //Get our active scene, return its index.
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex + 1);
+        //Put the current scene onto the stack, essentially saving it
+        m_LoadedLevels.Push(GetActiveScene().buildIndex);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
 
-    public void LoadSceneByName(string sceneName)
+    public void LoadPreviousScene()
     {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void LoadSceneByName(string sceneName, LoadSceneMode mode)
-    {
-        SceneManager.LoadScene(sceneName, mode);
-    }
-
-    public void ReturnToMenu()
-    {
-        GameManager.Instance().SetIsPaused(false);
-        int startMenu = 0;
-        SceneManager.LoadScene(startMenu);
+        if(m_LoadedLevels.Count > 0)
+            SceneManager.LoadScene(m_LoadedLevels.Pop());
+        else
+            Debug.Log("No previous scenes");
     }
 
     public void RemoveScene(string sceneName)
     {
         SceneManager.UnloadSceneAsync(sceneName);
+    }
+
+    public void LoadMenu()
+    {
+        //Put the current scene onto the stack, essentially saving it
+        m_LoadedLevels.Push(GetActiveScene().buildIndex);
+
+        GameManager.Instance().ResetScore();
+        GameManager.Instance().ResumeGame();
+        SceneManager.LoadScene("Main Menu");
     }
 
     //This function will only work on standalone builds of the game.

@@ -1796,18 +1796,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 352249cbaecbb3f4a9a2b3cbc4c3aef4, type: 3}
---- !u!114 &740677763 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2542423370390714612, guid: 352249cbaecbb3f4a9a2b3cbc4c3aef4,
-    type: 3}
-  m_PrefabInstance: {fileID: 719769118}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee345b6590d51fd448afb4903c525aa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &752499663
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,8 +3041,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740677763}
-        m_MethodName: ReturnToMenu
+      - m_Target: {fileID: 11400000, guid: b6a5892d8b162fc48a7c36bc89068b81, type: 2}
+        m_MethodName: LoadPreviousScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
