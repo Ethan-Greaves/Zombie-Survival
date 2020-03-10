@@ -1556,6 +1556,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 6670091046296317601, guid: f3c31cc148c06fe47bef6dbee8b0ed9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7695444153220963506, guid: f3c31cc148c06fe47bef6dbee8b0ed9e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1616,6 +1621,11 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 2021076228}
+    - target: {fileID: 6670091046296317612, guid: f3c31cc148c06fe47bef6dbee8b0ed9e,
+        type: 3}
+      propertyPath: m_Mass
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3c31cc148c06fe47bef6dbee8b0ed9e, type: 3}
 --- !u!1001 &1847821292365610855
