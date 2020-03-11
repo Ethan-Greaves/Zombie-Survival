@@ -1307,7 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe9dd8bda1896941aa3c9d95fc2a865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 667928640999602393, guid: 3c6bb9c56c31e4b46bbf1d7532530339, type: 3}
+  m_Camera: {fileID: 0}
 --- !u!114 &4340606912365637075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd68d85b6a89cdf478e7517d25a7bda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapon: {fileID: -3924935246399874272, guid: ee329c3cd08e58645834d20702d7f6c6,
+  startingWeapon: {fileID: 6067314735675569853, guid: 6f1a7354265853f44b0ed5e2e43676ad,
     type: 3}
   equippedWeapon: {fileID: 0}
   hand: {fileID: 4340606912875800016}

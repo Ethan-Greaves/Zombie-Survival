@@ -11,18 +11,5 @@ public class EnemyAnimation : MonoBehaviour
         m_Animator = GetComponent<Animator>();
     }
 
-    public void StartMovingAnimation()
-    {
-        m_Animator.SetBool("isMoving", true);
-    }
-    public void StartIdleAnimation()
-    {
-        m_Animator.SetBool("isMoving", false);
-    }
-
-    public void StartAttackAnimation()
-    {
-        m_Animator.SetBool("isMoving", false);
-        m_Animator.SetBool("isAttacking", true);
-    }
+    public Animator GetAnimator() { return m_Animator; }
 }

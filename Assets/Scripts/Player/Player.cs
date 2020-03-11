@@ -65,17 +65,17 @@ public class Player : MonoBehaviour
             transform.LookAt(new Vector3(point.x, transform.position.y, point.z));
 
             // Check when the mouse is near the player and as such make the gun stop looking to avoid weird rotation
-            CheckGunToMouseDistance(point);
+            //CheckGunToMouseDistance(point);
+
+            m_WeaponController.Aim(point);
         }
     }
 
     private void CheckGunToMouseDistance(Vector3 point)
     {
-        float StopLookingDistance = 4.5f;
+        float StopLookingDistance = 2.5f;
         if (Vector2.Distance(new Vector2(point.x, point.z), 
                              new Vector2(transform.position.x, transform.position.z)) > StopLookingDistance)
             m_WeaponController.Aim(point);
     }
-
-    
 }

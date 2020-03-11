@@ -18,8 +18,10 @@ public abstract class Enemy : MonoBehaviour
     protected EnemyAnimation m_EnemyAnimation;
     protected EnemyVFX m_EnemyVFX;
 
-    protected abstract void NormalAttack();
-    protected abstract void SpecialAttack();
+    private StateMachine m_EnemyStateMachine;
+    private IdleState m_IdleState;
+    private ChaseState m_ChaseState;
+    private AttackState m_AttackState;
 
     // Start is called before the first frame update
     void Awake()
@@ -29,16 +31,53 @@ public abstract class Enemy : MonoBehaviour
         m_EnemyAI = GetComponent<EnemyAI>();
         m_EnemyAnimation = GetComponent<EnemyAnimation>();
         m_EnemyVFX = GetComponent<EnemyVFX>();
+
+        m_EnemyStateMachine = new StateMachine();
+    }
+
+    private void Start()
+    {
+        m_IdleState = new IdleState(m_EnemyAI.GetNavMeshAgent(), this.gameObject, m_EnemyAnimation.GetAnimator());
+        m_ChaseState = new ChaseState(this.gameObject, m_EnemyAI.GetNavMeshAgent(), m_EnemyAI.GetPlayer(), m_EnemyAnimation.GetAnimator());
+        m_AttackState = new AttackState(this.gameObject, m_EnemyAnimation.GetAnimator());
+        m_EnemyStateMachine.ChangeState(m_IdleState);
     }
 
     // Update is called once per frame
     void Update()
     {
         m_EnemySFX.PlayNoisesSFX();
-        CheckToKillEnemy();
-        TieAnimationToStates();
+
+        m_EnemyStateMachine.UpdateState();
+        ChangeStatesBasedOffPlayerDistance();
     }
 
+    private void LateUpdate()
+    {
+        //Put this in a later execution order so update has a chance to set enemy to null
+        CheckToKillEnemy();
+    }
+
+    #region STATE FUNCTIONALITY
+    private void ChangeStatesBasedOffPlayerDistance()
+    {
+        if (m_EnemyAI.GetIsInChaseRange())
+        {
+            m_EnemyStateMachine.ChangeState(m_ChaseState);
+        }
+        if (m_EnemyAI.GetIsInAttackRange())
+        {
+            m_EnemyStateMachine.ChangeState(m_AttackState);
+        }
+        if (!m_EnemyAI.GetIsInChaseRange() && !m_EnemyAI.GetIsInAttackRange())
+        {
+            m_EnemyStateMachine.ChangeState(m_IdleState);
+        }
+    }
+
+    #endregion
+
+    #region DAMAGE & DEATH FUNCTIONALITY
     public void TakeDamage(int damage)
     {
         if(this.gameObject != null)
@@ -47,6 +86,8 @@ public abstract class Enemy : MonoBehaviour
             m_EnemyVFX.TakeDamageVFX();
             m_EnemySFX.TakeDamageSFX();
         }
+        if (m_Health < 100)
+            m_EnemyAI.SetChaseRange(m_EnemyAI.GetDistanceBetween());
     }
 
     private void CheckToKillEnemy()
@@ -64,16 +105,8 @@ public abstract class Enemy : MonoBehaviour
         Instantiate(m_PickupsToDrop[Random.Range(0, m_PickupsToDrop.Length)], transform.position, transform.rotation);
     }
 
-    private void TieAnimationToStates()
-    {
-        if (m_EnemyAI.GetCurrentState() == State.IDLE)
-            m_EnemyAnimation.StartIdleAnimation();
+    #endregion
 
-        else if (m_EnemyAI.GetCurrentState() == State.CHASING)
-            m_EnemyAnimation.StartMovingAnimation();
-
-        //else if (m_EnemyAI.GetCurrentState() == State.ATTACKING)
-        //    m_EnemyAnimation.StartAttackAnimation();
-    }
+   
 
 }
