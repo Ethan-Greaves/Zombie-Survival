@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//  |-----------------------------------------------------------------------|
-//  |                   What goes in a Game Manager?                        |
-//  |                                                                       |
-//  |  1. Score                                                             |
-//  |  2. Pause Function                                                    |
-//  |-----------------------------------------------------------------------|
-
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameMangerInstance;
     private SceneHandler m_SceneHandler;
-
+    private Player m_Player;
     private static bool m_bIsPaused;
     private static int m_iScore = 0;
     private int m_iNumOfEnemies;
@@ -34,15 +27,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         m_bIsPaused = false;
         m_SceneHandler = Resources.Load<SceneHandler>("SceneManager");
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //TODO find way to initialise a music audio clip var without using inspector (through code)
-        //SoundManager.Instance().PlayMusic()
-    }
+        if(m_Player != null)
+            m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
+        //if (m_MainLevelMusic != null)
+            
+    }
     #endregion
 
     #region PAUSE FUNCTIONALITY
@@ -59,13 +50,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         m_SceneHandler.LoadSceneByNameAdditive("Pause Menu");
         m_bIsPaused = true;
+        SoundManager.Instance().PauseMusic();
     }
 
     public void ResumeGame()
     {
+        if(m_SceneHandler.IsCurrentScene("Main Level"))
+            m_SceneHandler.RemoveScene("Pause Menu");
+
         Time.timeScale = 1f;
-        m_SceneHandler.RemoveScene("Pause Menu");
         m_bIsPaused = false;
+
+        SoundManager.Instance().ResumeMusic();
     }
 
     public void SetIsPaused(bool set)
@@ -80,6 +76,19 @@ public class GameManager : MonoBehaviour
     public int GetScore() { return m_iScore; }
     public void ResetScore() { m_iScore = 0; }
     public void AddScore(int scoreToAdd) { m_iScore += scoreToAdd; }
+    #endregion
+
+    #region GAME STATE FUNCTIONALITY
+    public void GameOver()
+    {
+        m_SceneHandler.LoadSceneByNameSingle("Game Over");
+        SoundManager.Instance().StopMusic();
+    }
+    public void LevelComplete()
+    {
+        m_SceneHandler.LoadSceneByNameSingle("Level Complete");
+        SoundManager.Instance().StopMusic();
+    }
     #endregion
 
 }

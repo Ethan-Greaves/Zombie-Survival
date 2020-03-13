@@ -27,13 +27,13 @@ public class ChaseState : IState
 
     public void Enter()
     {
-        Debug.Log(m_OwnerGameObject.name + " has entered Chasing state");
+        //Debug.Log(m_OwnerGameObject.name + " has entered Chasing state");
         BeginAnimation();
     }
 
     public void Execute()
     {
-        Debug.Log(m_OwnerGameObject.name + " is currently executing Chasing state");
+        //Debug.Log(m_OwnerGameObject.name + " is currently executing Chasing state");
 
         m_OwnerGameObject.transform.LookAt(m_Player.transform.position);
 
@@ -43,7 +43,7 @@ public class ChaseState : IState
 
     public void Exit()
     {
-        Debug.Log(m_OwnerGameObject.name + " has exited Chasing state");
+        //Debug.Log(m_OwnerGameObject.name + " has exited Chasing state");
     }
 
     

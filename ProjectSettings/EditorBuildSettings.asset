@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/Pause Menu.unity
     guid: d7c114f4aeae3634f912cd70cf61bf0c
+  - enabled: 1
+    path: Assets/Scenes/Game Over.unity
+    guid: d1c845b0b7486da4280651f77c8c3a0f
+  - enabled: 1
+    path: Assets/Scenes/Level Complete.unity
+    guid: ad14224b4f1ff3c458ebe94f3b286a86
   m_configObjects: {}

@@ -22,18 +22,18 @@ public class AttackState : IState
 
     public void Enter()
     {
-        Debug.Log(m_OwnerGameObject.name + " has entered attack state");
+        //Debug.Log(m_OwnerGameObject.name + " has entered attack state");
         BeginAnimation();
     }
 
     public void Execute()
     {
-        Debug.Log(m_OwnerGameObject.name + " is executing attack state");
+        //Debug.Log(m_OwnerGameObject.name + " is executing attack state");
     }
 
     public void Exit()
     {
-        Debug.Log(m_OwnerGameObject.name + " has exited attack state");
+        //Debug.Log(m_OwnerGameObject.name + " has exited attack state");
     }
 
   

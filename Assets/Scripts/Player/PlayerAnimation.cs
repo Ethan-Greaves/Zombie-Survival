@@ -11,7 +11,7 @@ public class PlayerAnimation : MonoBehaviour
         m_Animator = GetComponent<Animator>();
     }
 
-    public void AddAnimation(ref Vector3 vectorInput)
+    public void AddMovementAnimation(ref Vector3 vectorInput)
     {
         //TODO Animation needs to be tied to the motion of the character not the player input
         m_Animator.SetFloat("VerticalForward", vectorInput.z);
@@ -19,4 +19,6 @@ public class PlayerAnimation : MonoBehaviour
         m_Animator.SetFloat("HorizontalLeft", vectorInput.x);
         m_Animator.SetFloat("HorizontalRight", vectorInput.x);
     }
+
+    public void PlayDeathAnimation() { m_Animator.SetBool("IsDead", true); }
 }

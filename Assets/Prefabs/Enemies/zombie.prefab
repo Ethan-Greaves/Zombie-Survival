@@ -2308,7 +2308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccb3b5b05c252240891e52d1dbd429b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Damage: 0
+  m_Damage: 25
   m_Health: 100
   m_PickupsToDrop:
   - {fileID: 1903955988, guid: 879cee9ed8dbc394fb861f00e9f21e37, type: 3}
@@ -2636,8 +2636,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7285945374043719016}
-  m_LocalRotation: {x: 0, y: 0, z: 5.650639e-37, w: 1}
-  m_LocalPosition: {x: 9.703015e-16, y: 0.0434, z: 0.009269}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.370547e-15, y: 0.04340005, z: 0.009268999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6935981519124576963}

@@ -27,19 +27,19 @@ public class IdleState : IState
 
     public void Enter()
     {
-        Debug.Log(m_OwnerGameObject.name + " has entered idle state");
+        //Debug.Log(m_OwnerGameObject.name + " has entered idle state");
         BeginAnimation();
     }
 
     public void Execute()
     {
-        Debug.Log(m_OwnerGameObject.name + " is currently executing idle state");
+        //Debug.Log(m_OwnerGameObject.name + " is currently executing idle state");
         m_NavMeshAgent.SetDestination(m_OwnerGameObject.transform.position);
     }
 
     public void Exit()
     {
-        Debug.Log(m_OwnerGameObject.name + " has exited idle state");
+        //Debug.Log(m_OwnerGameObject.name + " has exited idle state");
 
     }
 }

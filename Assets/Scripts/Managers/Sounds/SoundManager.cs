@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     private static SoundManager m_SoundManagerInstance;
     private AudioSource m_MusicAudioSource;
     private AudioSource m_SFXAudioSource;
+    private AudioClip m_MainLevelMusic;
 
     public static SoundManager Instance()
     {
@@ -24,6 +25,7 @@ public class SoundManager : MonoBehaviour
         return m_SoundManagerInstance;
     }
 
+    #region INITILISATION
     //Used for initialising variables or game states
     private void Awake()
     {
@@ -35,14 +37,22 @@ public class SoundManager : MonoBehaviour
 
         //Make sure music always loops
         m_MusicAudioSource.loop = true;
+
+        m_MainLevelMusic = Resources.Load<AudioClip>("Music/Music");
     }
 
+    #endregion
+
     #region MUSIC
-    public void PlayMusic(AudioClip musicClip)
+    public void PlayMainLevelMusic()
     {
-        m_MusicAudioSource.clip = musicClip;
+        m_MusicAudioSource.clip = m_MainLevelMusic;
         m_MusicAudioSource.Play();
     }
+
+    public void StopMusic() { m_MusicAudioSource.Stop(); }
+    public void PauseMusic() { m_MusicAudioSource.Pause(); }
+    public void ResumeMusic() { m_MusicAudioSource.UnPause(); }
 
     #endregion
 
