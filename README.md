@@ -33,6 +33,12 @@ The "GEP-assignment-project" is a game created in Unity/C# during my second year
 <p>Settings menu:</p>
 <img src="https://im2.ezgif.com/tmp/ezgif-2-bb955d8be5b3.gif" width="auto" />
 
+<p>Different weapon types:</p>
+<img src="https://im2.ezgif.com/tmp/ezgif-2-f1b7b05215b1.gif" width="auto" />
+
+<p>Enemies change state:</p>
+<img src="https://im2.ezgif.com/tmp/ezgif-2-d75f8792838a.gif" width="auto" />
+
 ## Setup ⚙️
 
 ### Installation
