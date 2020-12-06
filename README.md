@@ -11,6 +11,8 @@
 ## Overview 📖
 The "GEP-assignment-project" is a game created in Unity/C# during my second year at university. It is a wave-based top-down shooter and has features such as pickups, enemies with different behavioral patterns, different weapons, an options menu, and more.
 
+**If you are not familiar with Unity's file structure, naviagte to: Assets/Scripts to see the code.**
+
 ## Details 👨‍💻
 
 ### Technologies
