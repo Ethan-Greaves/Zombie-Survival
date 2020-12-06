@@ -5,19 +5,36 @@
 </p>
 
 <hr>
-  <h4 align="center"><a  href="https://google.com">Live Demo</a></h4>
+  <h4 align="center"><a  href="https://ethan-greaves.itch.io/gep-assignment-project">Download .exe</a></h4>
 <hr>
 
 ## Overview 📖
-A game made in Unity for my GEP module during semseter 2.
+The "GEP-assignment-project" is a game created in Unity/C# during my second year at university. It is a wave-based top-down shooter and has features such as pickups, enemies with different behavioral patterns, different weapons, an options menu, and more.
 
-## Technologies used 👨‍💻
+## Details 👨‍💻
+
+### Technologies
+* Unity
+* C#
+
+### Features
+* A settings menu with volume, resolution and fullscreen controls
+* Different weapon types
+* 3D animations
+* Enemy AI with different states (idle chasing, attacking)
+* A pickup system
+
+### Patterns
+* Singleton
+* Component
+* State-machine
 
 ## Visuals 🎬
+<p>Settings menu:</p>
+<img src="https://im2.ezgif.com/tmp/ezgif-2-bb955d8be5b3.gif" width="auto" />
 
 ## Setup ⚙️
 
 ### Installation
 
-### Usage
-
+Click the "Download .exe" link at the top which will take you to the itch.io page for the game. Download and unzip the files. Click the "GEP Assignment Project.exe" to begin playing.
