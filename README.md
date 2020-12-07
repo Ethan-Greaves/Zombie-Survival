@@ -33,13 +33,13 @@ The "GEP-assignment-project" is a game created in Unity/C# during my second year
 
 ## Visuals 🎬
 <p>Settings menu:</p>
-<img src="https://github.com/Ethan-Greaves/Gifs/blob/master/GEPAssignmentProject/ezgif.com-gif-maker.gif" width="auto" />
+<img src="https://media.giphy.com/media/exAoVb0det5DTFS7wu/giphy.gif" width="auto" />
 
 <p>Different weapon types:</p>
-<img src="https://github.com/Ethan-Greaves/Gifs/blob/master/GEPAssignmentProject/WeaponTypes.gif" width="auto" />
+<img src="https://media.giphy.com/media/KSSZvfa8TWCcz6aZci/giphy.gif" width="auto" />
 
 <p>Enemies change state:</p>
-<img src="https://github.com/Ethan-Greaves/Gifs/blob/master/GEPAssignmentProject/enemyState.gif" width="auto" />
+<img src="https://media.giphy.com/media/az9JW9xRwXQ2xIvZBi/giphy.gif" width="auto" />
 
 ## Setup ⚙️
 
