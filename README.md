@@ -25,6 +25,7 @@ The "GEP-assignment-project" is a game created in Unity/C# during my second year
 * 3D animations
 * Enemy AI with different states (idle chasing, attacking)
 * A pickup system
+* Particle systems
 
 ### Patterns
 * Singleton
