@@ -15,9 +15,10 @@ The "GEP-assignment-project" is a game created in Unity/C# during my second year
 
 ## Details 👨‍💻
 
-### Technologies
+### Technologies & concepts
 * Unity
 * C#
+* Object-oriented programming
 
 ### Features
 * A settings menu with volume, resolution and fullscreen controls
