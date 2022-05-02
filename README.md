@@ -1,4 +1,4 @@
-<h1 align="center">GEP-assignment-Project</h1> 
+<h1 align="center">Zombie-Survival</h1> 
 
 <p align="center">
   <img src="https://img.shields.io/badge/Made%20by-Ethan%20Greaves-green" >
@@ -9,7 +9,7 @@
 <hr>
 
 ## Overview 📖
-The "GEP-assignment-project" is a game created in Unity/C# during my second year at university. It is a wave-based top-down shooter and has features such as pickups, enemies with different behavioral patterns, different weapons, an options menu, and more.
+Zombie-Survival is a game created in Unity/C# during my second year at university. It is a wave-based top-down shooter and has features such as pickups, enemies with different behavioral patterns, different weapons, an options menu, and more.
 
 **If you are not familiar with Unity's file structure, naviagte to: Assets/Scripts to see the code.**
 
