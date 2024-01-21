@@ -24,7 +24,7 @@ Zombie-Survival is a game created in Unity/C#. It is a wave-based top-down shoot
 * A settings menu with volume, resolution and fullscreen controls
 * Different weapon types
 * 3D animations
-* Enemy AI with different states (idle chasing, attacking)
+* Enemy AI with different states (idle, chasing, attacking)
 * A pickup system
 * Particle systems
 
